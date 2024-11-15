@@ -1,0 +1,63 @@
+<div
+    cdkDropListGroup
+    class="kanban-board"
+    cdkDropList
+    [cdkDropListData]="lists"
+    (cdkDropListDropped)="dropList($event)"
+>
+    <div
+        class="kanban-column"
+        *ngFor="let list of lists | async; let i = index"
+        cdkDrag
+    >
+        <div *cdkDragPlaceholder class="kanban-column-place"></div>
+
+        <div class="kanban-header-flex" cdkDragHandle>
+            <div class="text-right">
+                <button class="ml-2" (click)="showModalCard(list.id)">
+                    <i class="pi pi-plus-circle"></i>
+                </button>
+            </div>
+
+            <div class="kanban-header">
+                <h3>{{ list.title }}</h3>
+            </div>
+    
+            <div class="button">
+                <button (click)="showModalList(list.id)">
+                    <i class="pi pi-pencil"></i>
+                </button>
+            </div>
+        </div>
+        
+
+        <div
+            class="kanban-cards"
+            cdkDropList
+            [cdkDropListData]="list.cards"
+            (cdkDropListDropped)="dropCard($event, list)"
+            [id]="list.id"
+        >
+            <div *ngFor="let card of list.cards" class="kanban-card" cdkDrag>
+                <div class="kanban-header-flex">
+                    <h4>{{ card.title }}</h4>
+                    <div class="text-right">
+                        <button class="ml-2" (click)="showModalCard(list.id, card.id)">
+                            <i class="pi pi-pencil"></i>
+                        </button>
+                    </div>
+                </div>
+                <p>{{ card.description }}</p>
+                <div class="card-footer">
+                    <span class="date">{{ card.date | date }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button (click)="showModalList()">
+            <i class="pi pi-plus-circle"></i>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="grid p-p-3">
+    <!-- Sales Card -->
+    <div class="col-3 p-md-3">
+        <p-card header="Sales">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <div>
+                    <h2>120</h2>
+                    <p class="p-text-success">+12%</p>
+                </div>
+                <i class="pi pi-chart-line"></i>
+            </div>
+        </p-card>
+    </div>
+
+    <!-- Revenue Card -->
+    <div class="col-3 p-md-3">
+        <p-card header="Revenue">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <div>
+                    <h2>$4500</h2>
+                    <p class="p-text-success">+20%</p>
+                </div>
+                <i class="pi pi-chart-line"></i>
+            </div>
+        </p-card>
+    </div>
+
+    <!-- Visitors Card -->
+    <div class="col-3 p-md-3">
+        <p-card header="Visitors">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <div>
+                    <h2>360</h2>
+                    <p class="p-text-danger">+24%</p>
+                </div>
+                <i class="pi pi-chart-line"></i>
+            </div>
+        </p-card>
+    </div>
+
+    <!-- Stock Card -->
+    <div class="col-3 p-md-3">
+        <p-card header="Stock">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <div>
+                    <h2>164</h2>
+                    <p class="p-text-success">+30%</p>
+                </div>
+                <i class="pi pi-chart-line"></i>
+            </div>
+        </p-card>
+    </div>
+
+    <!-- Revenue Overview Chart -->
+    <div class="col-9">
+        <p-card class="h-full" header="Revenue Overview">
+            <p-chart
+                type="bar"
+                [data]="revenueData"
+                [options]="chartOptions"
+            ></p-chart>
+        </p-card>
+    </div>
+
+    <!-- Sales by Category Pie Chart -->
+    <div class="col-3 p-md-4">
+        <p-card header="Sales by Category">
+            <p-chart type="pie" [data]="categoryData"></p-chart>
+        </p-card>
+    </div>
+
+    <div class="col-9 p-md-8">
+        <p-card header="Recent Sales">
+          <div class="p-d-flex p-ai-center p-jc-between p-mb-3">
+            <input pInputText type="text" placeholder="Search" class="p-mr-2" />
+            <button pButton icon="pi pi-upload" class="p-button-rounded p-button-primary"></button>
+          </div>
+          <p-table [value]="sales" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+              <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price | currency }}</td>
+                <td>
+                  <span
+                    [ngClass]="{
+                      'p-tag': true,
+                      'p-tag-success': product.status === 'INSTOCK',
+                      'p-tag-warning': product.status === 'LOWSTOCK'
+                    }"
+                    >{{ product.status }}</span
+                  >
+                </td>
+                <td>
+                  <button pButton icon="pi pi-search" class="p-button-rounded p-button-secondary"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-card>
+      </div>
+
+      <!-- Top Products List -->
+      <div class="col-3 p-md-4">
+        <p-card header="Top Products" class="top-products">
+          <div *ngFor="let item of topProducts" class="product-item">
+            <img [src]="item.image" alt="product image" class="product-image" />
+            <div class="product-info">
+              <span class="product-name">{{ item.name }}</span>
+              <p-rating [value]="item.rating" [readonly]="true" stars="5" class="product-rating"></p-rating>
+            </div>
+            <span class="product-price">{{ item.price | currency }}</span>
+          </div>
+        </p-card>
+      </div>
+</div>

@@ -1,0 +1,6 @@
+export * from './dashboard/dashboard.module'
+export * from './canban/canban.module'
+export * from './map/map.module'
+export * from './area/area.module'
+export * from './role/role.module'
+export * from './worker/worker.module'

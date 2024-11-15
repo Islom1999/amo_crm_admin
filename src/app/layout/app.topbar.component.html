@@ -1,0 +1,35 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="" style="text-align: center; justify-content: center;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDocRd_jBlNmeHTp0eGNcgJ5rQa_cqBV7HZA&s" alt="logo">
+        <span></span>
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <!-- <div class="flex justify-content-center align-items-center px-5 mx-5 gap-5">
+        <i class="pi pi-bell mr-4 p-text-secondary" pBadge style="font-size: 1.5rem" value="2"></i>
+        <i class="pi pi-calendar mr-4 p-text-secondary" pBadge style="font-size: 1.5rem" [value]="'10+'" severity="danger"></i>
+        <i class="pi pi-envelope p-text-secondary" pBadge style="font-size: 1.5rem" severity="danger"></i>
+    </div> -->
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <!-- <button class="p-link layout-topbar-button">
+            <i class="pi pi-calendar"></i>
+            <span>Calendar</span>
+        </button> -->
+        <button class="p-link layout-topbar-button" (click)="logout()">
+            <i class="pi pi-sign-out"></i>
+            <span>Chiqish</span>
+        </button>
+        <!-- <button class="p-link layout-topbar-button" [routerLink]="">
+            <i class="pi pi-cog"></i>
+            <span>Settings</span>
+        </button> -->
+    </div>
+</div>
