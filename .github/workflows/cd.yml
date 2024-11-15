@@ -7,7 +7,7 @@ on:
 env:
   SERVER_HOST: 91.200.151.163
   SERVER_USERNAME: root
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_PASSWORD }}
 
 
 jobs: 
@@ -21,10 +21,11 @@ jobs:
       with:
         host: ${{ env.SERVER_HOST }}
         username: ${{ env.SERVER_USERNAME }}
-        key: ${{ env.SSH_PRIVATE_KEY }}
+        password: ${{ env.SSH_PRIVATE_KEY }}
+        # key: ${{ env.SSH_PRIVATE_KEY }}
         script: |
           cd ~/amo_crm_admin/
           git pull
           npm install
           ng build
-          sudo rsync -av --delete /root/amo_crm_admin/dist/amo_crm/ /var/www/amo_crm_admin/
+          sudo rsync -av --delete /root/amo_crm_admin/dist/amo_crm_admin/ /var/www/amo_crm_admin/
